@@ -4,129 +4,129 @@ import (
 	"image/color"
 )
 
-type Position struct {
-	x float64
-	y float64
+type PositionObject struct {
+	X float64 `json:y`
+	Y float64 `json:y`
 }
 
 type ConnectionDataObject struct {
-	entityId int
-	circuitId int
+	EntityId int `json:entity_id`
+	CircuitId int `json:circuit_id`
 }
 
 type ConnectionPoint struct {
-	red []ConnectionDataObject
-	green []ConnectionDataObject
+	Red []ConnectionDataObject `json:red`
+	Green []ConnectionDataObject `json:green`
 }
 
 type Connection struct {
-	one ConnectionPoint
-	two ConnectionPoint
+	One ConnectionPoint `json:1`
+	Two ConnectionPoint `json:2`
 }
 
 type ItemRequestObject struct {
-	key string
-	value int
+	Key string `json:key`
+	Value int `json:value`
 }
 
 type ItemFilterObject struct {
-	name string
-	index int
+	Name string `json:name`
+	Index int `json:index`
 }
 
-type Inventory struct {
-	filters []ItemFilterObject
-	bar int
+type InventoryObject struct {
+	Filters []ItemFilterObject `json:filters`
+	Bar int `json:bar`
 }
 
 type LogisticsFilterObject struct {
-	name string
-	index int
-	count int
+	Name string `json:name`
+	Index int `json:index`
+	Count int `json:count`
 }
 
 type SpeakerParameterObject struct {
-	playbackVolume float64
-	playbackGlobally bool
-	allowPolyphony bool
+	PlaybackVolume float64 `json:playback_volume`
+	PlaybackGlobally bool `json:playback_globally`
+	AllowPolyphony bool `json:allow_polyphony`
 }
 
 type SignalId struct {
-	name string
-	t string
+	Name string `json:name`
+	Type string `json:type`
 }
 
 type SpeakerAlertParameterObject struct {
-	showAlert bool
-	showOnMap bool
-	iconSignalId SignalId
-	alertMessage string
+	ShowAlert bool `json:show_alert`
+	ShowOnMap bool `json:show_on_map`
+	IconSignalId SignalId `json:icon_signal_id`
+	AlertMessage string `json:alert_message`
 }
 
 type Entity struct {
-	number int
-	name string
-	position Position
-	direction int
-	orientation float64
-	connections Connection
+	Number int `json:entity_number`
+	Name string `json:name`
+	Position PositionObject `json:position`
+	Direction int `json:direction`
+	Orientation float64 `json:orientation`
+	Connections Connection `json:connections`
 	//controlBehaviour
-	items ItemRequestObject
-	recipe string
-	bar int
-	inventory Inventory
-	t string
-	inputPriority string
-	outputPriority string
-	filter string
-	filters []ItemFilterObject
-	filterMode string
-	overrideStackSize uint8
-	dropPosition Position
-	pickupPosition Position
-	requestFilters []LogisticsFilterObject
-	requestFromBuffers bool
-	parameters SpeakerParameterObject
-	alertParameters SpeakerAlertParameterObject
-	autoLaunch bool
-	color color.RGBA
-	station string
+	Items ItemRequestObject `json:items`
+	Recipe string `json:recipe`
+	Bar int `json:bar`
+	Inventory InventoryObject `json:inventory`
+	Type string `json:type`
+	InputPriority string `json:input_priority`
+	OutputPriority string `json:output_priority`
+	Filter string `json:filter`
+	Filters []ItemFilterObject `json:filters`
+	FilterMode string `json:filter_mode`
+	OverrideStackSize uint8 `json:override_stack_size`
+	DropPosition PositionObject `json:drop_position`
+	PickupPosition PositionObject `json:pickup_position`
+	RequestFilters []LogisticsFilterObject `json:request_filters`
+	RequestFromBuffers bool `json:request_from_buffers`
+	Parameters SpeakerParameterObject `json:parameters`
+	AlertParameters SpeakerAlertParameterObject `json:alert_parameters`
+	AutoLaunch bool `json:auto_launch`
+	Color color.RGBA `json:color`
+	Station string `json:station`
 }
 
 type Tile struct {
-	name string
-	position Position
+	Name string `json:name`
+	Position PositionObject `json:position`
 }
 
 type Icon struct {
-	index int
-	signal SignalId
+	Index int `json:index`
+	Signal SignalId `json:signal`
 }
 
 type WaitCondition struct {
-	t string
-	compareType string
-	ticks uint
+	Type string `json:type`
+	CompareType string `json:compare_type`
+	Ticks uint `json:ticks`
 	//condition CircuitCondition
 }
 
 type ScheduleRecord struct {
-	station string
-	waitConditions []WaitCondition
+	Station string `json:entity_number`
+	WaitConditions []WaitCondition `json:entity_number`
 }
 
 type ScheduleObject struct {
-	schedule []ScheduleRecord
-	locomotives int
+	Schedule []ScheduleRecord `json:entity_number`
+	Locomotives int `json:entity_number`
 }
 
 type Blueprint struct {
-	item string
-	label string
-	labelColor color.RGBA
-	entities []Entity
-	tiles []Tile
-	icons []Icon
-	schedules []ScheduleObject
-	version int64
+	Item string `json:item`
+	Label string `json:label`
+	LabelColor color.RGBA `json:label_color`
+	Entities []Entity `json:entities`
+	Tiles []Tile `json:tiles`
+	Icons []Icon `json:icons`
+	Schedules []ScheduleObject `json:schedules`
+	Version int64 `json:version`
 }
