@@ -11,17 +11,21 @@ import (
 	"fmt"
 )
 
+type BpParse struct {
+	BP Blueprint `json:"blueprint"`
+}
+
 func parseBPString(s string) (Blueprint, error) {
   s = s[1:]
-	var out Blueprint
+	var out BpParse
 
   // base64 to bytes
   b, err := base64.StdEncoding.DecodeString(s)
-  if err != nil { return out, errors.New("Couldn't decode blueprint") }
+  if err != nil { return out.BP, errors.New("Couldn't decode blueprint") }
 
   // decompress bytes to json string
   r, err := zlib.NewReader(bytes.NewReader(b))
-  if err != nil { return out, errors.New("Couldn't uncompress blueprint") }
+  if err != nil { return out.BP, errors.New("Couldn't uncompress blueprint") }
 	var dat bytes.Buffer
 	io.Copy(bufio.NewWriter(&dat), r)
   r.Close()
@@ -31,8 +35,8 @@ func parseBPString(s string) (Blueprint, error) {
 	// parsing json
 	err = json.Unmarshal(dat.Bytes(), &out)
 	if err != nil {
-		return out, errors.New("Couldn't parse json")
+		return out.BP, errors.New("Couldn't parse json")
 	}
 
-	return out, nil 
+	return out.BP, nil
 }
