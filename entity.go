@@ -5,17 +5,17 @@ import (
 )
 
 type PositionObject struct {
-	X float64 `json:"y"`
+	X float64 `json:"x"`
 	Y float64 `json:"y"`
 }
 
 type ConnectionDataObject struct {
-	EntityId int `json:"entity_id"`
+	EntityId  int `json:"entity_id"`
 	CircuitId int `json:"circuit_id"`
 }
 
 type ConnectionPoint struct {
-	Red []ConnectionDataObject `json:"red"`
+	Red []ConnectionDataObject   `json:"red"`
 	Green []ConnectionDataObject `json:"green"`
 }
 
@@ -26,12 +26,12 @@ type Connection struct {
 
 type ItemRequestObject struct {
 	Key string `json:"key"`
-	Value int `json:"value"`
+	Value int  `json:"value"`
 }
 
 type ItemFilterObject struct {
 	Name string `json:"name"`
-	Index int `json:"index"`
+	Index int  `json:"index"`
 }
 
 type InventoryObject struct {
@@ -41,14 +41,14 @@ type InventoryObject struct {
 
 type LogisticsFilterObject struct {
 	Name string `json:"name"`
-	Index int `json:"index"`
-	Count int `json:"count"`
+	Index int   `json:"index"`
+	Count int   `json:"count"`
 }
 
 type SpeakerParameterObject struct {
 	PlaybackVolume float64 `json:"playback_volume"`
-	PlaybackGlobally bool `json:"playback_globally"`
-	AllowPolyphony bool `json:"allow_polyphony"`
+	PlaybackGlobally bool  `json:"playback_globally"`
+	AllowPolyphony bool    `json:"allow_polyphony"`
 }
 
 type SignalId struct {
@@ -57,10 +57,10 @@ type SignalId struct {
 }
 
 type SpeakerAlertParameterObject struct {
-	ShowAlert bool `json:"show_alert"`
-	ShowOnMap bool `json:"show_on_map"`
+	ShowAlert bool        `json:"show_alert"`
+	ShowOnMap bool        `json:"show_on_map"`
 	IconSignalId SignalId `json:"icon_signal_id"`
-	AlertMessage string `json:"alert_message"`
+	AlertMessage string   `json:"alert_message"`
 }
 
 type Entity struct {
@@ -70,7 +70,7 @@ type Entity struct {
 	Direction int `json:"direction"`
 	Orientation float64 `json:"orientation"`
 	Connections Connection `json:"connections"`
-	//controlBehaviour
+	//TODO: controlBehaviour
 	Items ItemRequestObject `json:"items"`
 	Recipe string `json:"recipe"`
 	Bar int `json:"bar"`
@@ -94,20 +94,20 @@ type Entity struct {
 }
 
 type Tile struct {
-	Name string `json:"name"`
+	Name string             `json:"name"`
 	Position PositionObject `json:"position"`
 }
 
 type Icon struct {
-	Index int `json:"index"`
+	Index int       `json:"index"`
 	Signal SignalId `json:"signal"`
 }
 
 type WaitCondition struct {
-	Type string `json:"type"`
+	Type string        `json:"type"`
 	CompareType string `json:"compare_type"`
-	Ticks uint `json:"ticks"`
-	//condition CircuitCondition
+	Ticks uint         `json:"ticks"`
+	//TODO: condition CircuitCondition
 }
 
 type ScheduleRecord struct {
@@ -121,12 +121,12 @@ type ScheduleObject struct {
 }
 
 type Blueprint struct {
-	Item string `json:"item"`
-	Label string `json:"label"`
-	LabelColor color.RGBA `json:"label_color"`
-	Entities []Entity `json:"entities"`
-	Tiles []Tile `json:"tiles"`
-	Icons []Icon `json:"icons"`
+	Item string                `json:"item"`
+	Label string               `json:"label"`
+	LabelColor color.RGBA      `json:"label_color"`
+	Entities []Entity          `json:"entities"`
+	Tiles []Tile               `json:"tiles"`
+	Icons []Icon               `json:"icons"`
 	Schedules []ScheduleObject `json:"schedules"`
-	Version int64 `json:"version"`
+	Version int64              `json:"version"`
 }
