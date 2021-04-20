@@ -1,8 +1,8 @@
 package main
 
 import (
-	"os"
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -13,7 +13,9 @@ func main() {
 	}
 
 	bp, err := parseBPString(toParse)
-	if err != nil { panic(err) }
+	if err != nil {
+		panic(err)
+	}
 
 	fmt.Println(bp)
 }

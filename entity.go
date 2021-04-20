@@ -15,7 +15,7 @@ type ConnectionDataObject struct {
 }
 
 type ConnectionPoint struct {
-	Red []ConnectionDataObject   `json:"red"`
+	Red   []ConnectionDataObject `json:"red"`
 	Green []ConnectionDataObject `json:"green"`
 }
 
@@ -25,30 +25,30 @@ type Connection struct {
 }
 
 type ItemRequestObject struct {
-	Key string `json:"key"`
-	Value int  `json:"value"`
+	Key   string `json:"key"`
+	Value int    `json:"value"`
 }
 
 type ItemFilterObject struct {
-	Name string `json:"name"`
-	Index int  `json:"index"`
+	Name  string `json:"name"`
+	Index int    `json:"index"`
 }
 
 type InventoryObject struct {
 	Filters []ItemFilterObject `json:"filters"`
-	Bar int `json:"bar"`
+	Bar     int                `json:"bar"`
 }
 
 type LogisticsFilterObject struct {
-	Name string `json:"name"`
-	Index int   `json:"index"`
-	Count int   `json:"count"`
+	Name  string `json:"name"`
+	Index int    `json:"index"`
+	Count int    `json:"count"`
 }
 
 type SpeakerParameterObject struct {
-	PlaybackVolume float64 `json:"playback_volume"`
-	PlaybackGlobally bool  `json:"playback_globally"`
-	AllowPolyphony bool    `json:"allow_polyphony"`
+	PlaybackVolume   float64 `json:"playback_volume"`
+	PlaybackGlobally bool    `json:"playback_globally"`
+	AllowPolyphony   bool    `json:"allow_polyphony"`
 }
 
 type SignalId struct {
@@ -57,76 +57,76 @@ type SignalId struct {
 }
 
 type SpeakerAlertParameterObject struct {
-	ShowAlert bool        `json:"show_alert"`
-	ShowOnMap bool        `json:"show_on_map"`
+	ShowAlert    bool     `json:"show_alert"`
+	ShowOnMap    bool     `json:"show_on_map"`
 	IconSignalId SignalId `json:"icon_signal_id"`
 	AlertMessage string   `json:"alert_message"`
 }
 
 type Entity struct {
-	Number int `json:"entity_number"`
-	Name string `json:"name"`
-	Position PositionObject `json:"position"`
-	Direction int `json:"direction"`
-	Orientation float64 `json:"orientation"`
-	Connections Connection `json:"connections"`
+	Number      int            `json:"entity_number"`
+	Name        string         `json:"name"`
+	Position    PositionObject `json:"position"`
+	Direction   int            `json:"direction"`
+	Orientation float64        `json:"orientation"`
+	Connections Connection     `json:"connections"`
 	//TODO: controlBehaviour
-	Items ItemRequestObject `json:"items"`
-	Recipe string `json:"recipe"`
-	Bar int `json:"bar"`
-	Inventory InventoryObject `json:"inventory"`
-	Type string `json:"type"`
-	InputPriority string `json:"input_priority"`
-	OutputPriority string `json:"output_priority"`
-	Filter string `json:"filter"`
-	Filters []ItemFilterObject `json:"filters"`
-	FilterMode string `json:"filter_mode"`
-	OverrideStackSize uint8 `json:"override_stack_size"`
-	DropPosition PositionObject `json:"drop_position"`
-	PickupPosition PositionObject `json:"pickup_position"`
-	RequestFilters []LogisticsFilterObject `json:"request_filters"`
-	RequestFromBuffers bool `json:"request_from_buffers"`
-	Parameters SpeakerParameterObject `json:"parameters"`
-	AlertParameters SpeakerAlertParameterObject `json:"alert_parameters"`
-	AutoLaunch bool `json:"auto_launch"`
-	Color color.RGBA `json:"color"`
-	Station string `json:"station"`
+	Items              ItemRequestObject           `json:"items"`
+	Recipe             string                      `json:"recipe"`
+	Bar                int                         `json:"bar"`
+	Inventory          InventoryObject             `json:"inventory"`
+	Type               string                      `json:"type"`
+	InputPriority      string                      `json:"input_priority"`
+	OutputPriority     string                      `json:"output_priority"`
+	Filter             string                      `json:"filter"`
+	Filters            []ItemFilterObject          `json:"filters"`
+	FilterMode         string                      `json:"filter_mode"`
+	OverrideStackSize  uint8                       `json:"override_stack_size"`
+	DropPosition       PositionObject              `json:"drop_position"`
+	PickupPosition     PositionObject              `json:"pickup_position"`
+	RequestFilters     []LogisticsFilterObject     `json:"request_filters"`
+	RequestFromBuffers bool                        `json:"request_from_buffers"`
+	Parameters         SpeakerParameterObject      `json:"parameters"`
+	AlertParameters    SpeakerAlertParameterObject `json:"alert_parameters"`
+	AutoLaunch         bool                        `json:"auto_launch"`
+	Color              color.RGBA                  `json:"color"`
+	Station            string                      `json:"station"`
 }
 
 type Tile struct {
-	Name string             `json:"name"`
+	Name     string         `json:"name"`
 	Position PositionObject `json:"position"`
 }
 
 type Icon struct {
-	Index int       `json:"index"`
+	Index  int      `json:"index"`
 	Signal SignalId `json:"signal"`
 }
 
 type WaitCondition struct {
-	Type string        `json:"type"`
+	Type        string `json:"type"`
 	CompareType string `json:"compare_type"`
-	Ticks uint         `json:"ticks"`
+	Ticks       uint   `json:"ticks"`
 	//TODO: condition CircuitCondition
 }
 
 type ScheduleRecord struct {
-	Station string `json:"entity_number"`
+	Station        string          `json:"entity_number"`
 	WaitConditions []WaitCondition `json:"entity_number"`
 }
 
 type ScheduleObject struct {
-	Schedule []ScheduleRecord `json:"entity_number"`
-	Locomotives int `json:"entity_number"`
+	Schedule    []ScheduleRecord `json:"entity_number"`
+	Locomotives int              `json:"entity_number"`
 }
 
 type Blueprint struct {
-	Item string                `json:"item"`
-	Label string               `json:"label"`
-	LabelColor color.RGBA      `json:"label_color"`
-	Entities []Entity          `json:"entities"`
-	Tiles []Tile               `json:"tiles"`
-	Icons []Icon               `json:"icons"`
-	Schedules []ScheduleObject `json:"schedules"`
-	Version int64              `json:"version"`
+	Item       string           `json:"item"`
+	Label      string           `json:"label"`
+	LabelColor color.RGBA       `json:"label_color"`
+	Entities   []Entity         `json:"entities"`
+	Tiles      []Tile           `json:"tiles"`
+	Icons      []Icon           `json:"icons"`
+	Schedules  []ScheduleObject `json:"schedules"`
+	Version    int64            `json:"version"`
 }
