@@ -82,6 +82,7 @@ function data:extend(table)
 end
 
 
+
 -- run the file from factorio. It writes to the data object
 require("util")
 require("factorio-data.base.prototypes.entity.factorio-logo")
