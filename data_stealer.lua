@@ -60,15 +60,27 @@ end
 defines = { direction = {} }
 data = { raw = { } }
 
+function has_value(tab, val)
+    for index, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+    return false
+end
+
 function data:extend(table)
 	for k,v in ipairs(table) do
-		print("adding " .. v["type"] .. " --- " .. v["name"])
-		if self.raw[v["type"]] == nil then
-			self.raw[v["type"]] = {}
+		--print("adding " .. v["type"] .. " --- " .. v["name"])
+		if v["flags"] ~= nil and has_value(v["flags"], "player-creation") then
+			if self.raw[v["type"]] == nil then
+				self.raw[v["type"]] = {}
+			end
+			self.raw[v["type"]][v["name"]] = v
 		end
-		self.raw[v["type"]][v["name"]] = v
 	end
 end
+
 
 
 -- run the file from factorio. It writes to the data object
@@ -76,8 +88,19 @@ require("util")
 require("factorio-data.base.prototypes.entity.factorio-logo")
 require("factorio-data.base.prototypes.entity.entities")
 
+filtered = {}
+
+for k,v in pairs(data.raw) do
+	for key,val in pairs(v) do
+		if val["picture"] ~= nil then
+			filtered[val["name"]] = {}
+			filtered[val["name"]]["picture"] = val["picture"]
+		end
+	end
+end
+
 -- encode it into a json
-local json = luna.encode(data.raw)
+local json = luna.encode(filtered)
 
 -- dump that json into a file
 file = io.open("entities.json", "w+")
