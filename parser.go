@@ -16,7 +16,7 @@ type BpParse struct {
 }
 
 func parseBPString(s string) (Blueprint, error) {
-	s = s[1:]
+	s = s[1:] // first char in bp string is version number (always zero as of 1.1.32)
 	var out BpParse
 
 	// base64 to bytes
@@ -34,9 +34,10 @@ func parseBPString(s string) (Blueprint, error) {
 	io.Copy(bufio.NewWriter(&dat), r)
 	r.Close()
 
+	fmt.Println("BP JSON:")
 	fmt.Println(string(dat.Bytes()))
 
-	// parsing json
+	// parse json
 	err = json.Unmarshal(dat.Bytes(), &out)
 	if err != nil {
 		return out.BP, errors.New("Couldn't parse json")
@@ -45,6 +46,8 @@ func parseBPString(s string) (Blueprint, error) {
 	return out.BP, nil
 }
 
+// finds the offsets for each axis so that those axis are always positive and start at 0 0
+// because factorio blueprint coordinates are taken from the game 1:1
 func (b *Blueprint) FindZero() (float64, float64) {
 	if len(b.Entities) < 1 {
 		return 0, 0

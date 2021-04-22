@@ -9,14 +9,21 @@ import (
 )
 
 type drawer struct {
-	items  []string
+	items  []string // all entity names that are supported by this drawer
 	drawfn func(name string) (image.Image, error)
 }
 
+// For primitive, not animated, without alt-mode support, without circuit connection support entities
+// such as solar panel
 func NormalDraw(name string) (image.Image, error) {
 	return LoadImage(name)
 }
 
+// Initializes drawing canvas with the right size
+// ents - entity array from blueprint string
+// offx - by how much change the X axis so that the smallest X coordinate in blueprint is on 0
+// offx -                        Y                           Y
+// returns the image canvas pointer and all drawers that are needed for this blueprint render
 func Init(ents []Entity, offx, offy float64) (*image.RGBA, []drawer) {
 	var mw, mh float64
 
@@ -34,8 +41,11 @@ func Init(ents []Entity, offx, offy float64) (*image.RGBA, []drawer) {
 	return image.NewRGBA(image.Rect(0, 0, int(mw), int(mh))), []drawer{drawer{[]string{"solar-panel"}, NormalDraw}}
 }
 
+// Main drawing function. Calls the corresponding drawing functions for every entity in the blueprint
+// ents - entity array from the blueprint string
+// dst  - the image used as a canvas for drawing
+// drs  - all available drawer structs that are supposed to be used for rendering the entities
 func Draw(ents []Entity, dst *image.RGBA, drs []drawer) {
-
 	for i := 0; i < len(ents); i++ {
 		fmt.Printf("Drawing %s\n", ents[i].Name)
 

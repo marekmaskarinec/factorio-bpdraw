@@ -10,6 +10,8 @@ import (
 
 var imgChache map[string]image.Image
 
+// Reads entity texture
+// If the entity is animated, the entire texture atlas is returned
 func LoadImage(name string) (image.Image, error) {
 	if val, ok := imgChache[name]; ok {
 		return val, nil

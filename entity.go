@@ -4,6 +4,9 @@ import (
 	"image/color"
 )
 
+// There structs implement the object types from the blueprint string
+// https://wiki.factorio.com/Blueprint_string_format
+
 type PositionObject struct {
 	X float64 `json:"x"`
 	Y float64 `json:"y"`
