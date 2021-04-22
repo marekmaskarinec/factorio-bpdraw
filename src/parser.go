@@ -34,9 +34,6 @@ func ParseBPString(s string) (Blueprint, error) {
 	io.Copy(bufio.NewWriter(&dat), r)
 	r.Close()
 
-	fmt.Println("BP JSON:")
-	fmt.Println(string(dat.Bytes()))
-
 	// parse json
 	err = json.Unmarshal(dat.Bytes(), &out)
 	if err != nil {
@@ -51,7 +48,6 @@ func ParseEntityInfo() map[string]EntityInfo {
 	if err != nil {
 		panic(err)
 	}
-
 	dat, err := io.ReadAll(f)
 	if err != nil {
 		panic(err)
