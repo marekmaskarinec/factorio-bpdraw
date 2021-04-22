@@ -14,7 +14,6 @@ import (
 type BpParse struct {
 	BP Blueprint `json:"blueprint"`
 }
-
 func ParseBPString(s string) (Blueprint, error) {
 	s = s[1:] // first char in bp string is version number (always zero as of 1.1.32)
 	var out BpParse
@@ -34,6 +33,9 @@ func ParseBPString(s string) (Blueprint, error) {
 	io.Copy(bufio.NewWriter(&dat), r)
 	r.Close()
 
+	fmt.Println("BP JSON:")
+	fmt.Println(string(dat.Bytes()))
+
 	// parse json
 	err = json.Unmarshal(dat.Bytes(), &out)
 	if err != nil {
@@ -43,13 +45,12 @@ func ParseBPString(s string) (Blueprint, error) {
 	return out.BP, nil
 }
 
-
 func ParseEntityInfo() map[string]EntityInfo {
 	f, err := os.Open("entities.json")
 	if err != nil {
 		panic(err)
 	}
-	
+
 	dat, err := io.ReadAll(f)
 	if err != nil {
 		panic(err)
