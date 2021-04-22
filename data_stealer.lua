@@ -13,7 +13,10 @@ print("#########################################################################
 
 luna = require("lunajson")
 
--- list of files that need to be included for the entities script to be executed
+-- List of files that need to be included for the entities script to be executed
+-- When factorio starts, the files are in different locations relative to each other?
+-- So I just include all files that entities.lua depends on like this.
+-- ==================================================================================
 local lualib = {
 	"util",
 	"circuit-connector-sprites",
@@ -36,43 +39,24 @@ local base = {
 
 package.preload["__base__/prototypes/entity/spidertron-light-positions"] = function () return require "factorio-data.base.prototypes.entity.spidertron-light-positions" end
 
-for key,value in ipairs(lualib) do
-	package.preload[value] = function() return require("factorio-data.core.lualib." .. value) end
-end
+-- load those files with package.preload
+-- =====================================
+for key,value in ipairs(lualib) do package.preload[value] = function() return require("factorio-data.core.lualib." .. value) end end
+for key,value in ipairs(base)   do package.preload[value] = function() return require("factorio-data.base."        .. value) end end
 
-for key,value in ipairs(base) do
-	package.preload[value] = function() return require("factorio-data.base." .. value) end
-end
+-- fake internal factorio tables
+-- =============================
+defines = { direction = {} } -- directions in the data tables are all nil but whatever. We don't need those.
 
-function tprint (tbl, indent)
-  if not indent then indent = 0 end
-  for k, v in pairs(tbl) do
-    formatting = string.rep("    ", indent) .. k .. ": "
-    if type(v) == "table" then
-      print(formatting)
-      tprint(v, indent+1)
-    else
-      print(formatting .. tostring(v))
-    end
-  end
-end
+function has_value(tab, val) for index, value in ipairs(tab) do if value == val then return true end end return false end
 
-defines = { direction = {} }
+-- fake data object
+-- ================
 data = { raw = { } }
-
-function has_value(tab, val)
-    for index, value in ipairs(tab) do
-        if value == val then
-            return true
-        end
-    end
-    return false
-end
-
 function data:extend(table)
 	for k,v in ipairs(table) do
-		--print("adding " .. v["type"] .. " --- " .. v["name"])
 		if v["flags"] ~= nil and has_value(v["flags"], "player-creation") then
+			print("adding " .. v["name"])
 			if self.raw[v["type"]] == nil then
 				self.raw[v["type"]] = {}
 			end
@@ -81,18 +65,18 @@ function data:extend(table)
 	end
 end
 
-
-
--- run the file from factorio. It writes to the data object
+-- run the factorio scripts. It writes to the data object
+-- ======================================================
 require("util")
-require("factorio-data.base.prototypes.entity.factorio-logo")
 require("factorio-data.base.prototypes.entity.entities")
 
+-- filter out the raw data table
+-- =============================
 filtered = {}
-
 for k,v in pairs(data.raw) do
 	for key,val in pairs(v) do
 		if val["picture"] ~= nil then
+			print("filtered add " .. val["name"])
 			filtered[val["name"]] = {}
 			filtered[val["name"]]["picture"] = val["picture"]
 		end
@@ -100,14 +84,16 @@ for k,v in pairs(data.raw) do
 end
 
 -- encode it into a json
+-- =====================
 local json = luna.encode(filtered)
 
 -- dump that json into a file
+-- ==========================
 file = io.open("entities.json", "w+")
 io.output(file)
 io.write(json)
 io.close(file)
 
 print("\n###############")
-print("### SUCCESS ###")
-print("###############")
+print  ("### SUCCESS ###")
+print  ("###############")
