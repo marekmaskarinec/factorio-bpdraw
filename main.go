@@ -34,6 +34,7 @@ func main() {
 
 	info := bpdraw.ParseEntityInfo()
 
+
 	offx, offy := bp.FindZero()
 	dst := bpdraw.Init(bp.Entities, offx, offy)
 	bpdraw.Draw(bp.Entities, dst, info)
