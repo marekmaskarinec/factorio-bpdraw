@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"image"
 )
 
 var factorioPath string
@@ -13,6 +14,8 @@ func main() {
 	//toParse := "0eNptjsEOwiAQRP9lztjY2oryK8YYqhtDQhcC1Ng0/LtQLx68zUx23uyK0c7kg+EEtcLcHUeoy4ponqxtzdLiCQom0QQB1lN10Vkddl4zWWQBww96Q7X5KkCcTDL0xWxmufE8jRTKwV+AgHexdBzXvcLZdc0gsBRxbIZcodu6+nlW4EUhbpXu1Pby3MmDlEO773P+ABhkRWI="
 
 	toParse := "0eNqN0F0KwjAMAOC75Lkb7qdUexUR6TRIoUtL24lj9O62E0FQcG9JSL6QLDCYCZ3XFEEuoC+WAsjjAkHfSJlSi7NDkKAjjsCA1FiyYI3ylVOEBhIDTVd8gGzSiQFS1FHji1mT+UzTOKDPDT8BBs6GPGOp7MtOJWrOYM4Br3lK7MtpNzrdH6fb6PC30xYnH7l+Q348j8EdfVhH2n3Ti0MrOiF4s+tTegIAP3Ni"
+
+	imgChache = map[string]image.Image{}
 
 	if len(os.Args) > 1 {
 		factorioPath = os.Args[1]

@@ -8,7 +8,13 @@ import (
 	"path/filepath"
 )
 
+var imgChache map[string]image.Image
+
 func LoadImage(name string) (image.Image, error) {
+	if val, ok := imgChache[name]; ok {
+		return val, nil
+	}
+
 	f, err := os.Open(factorioPath + filepath.FromSlash("data/base/graphics/entity/"+name+"/hr-"+name+".png"))
 	if err != nil {
 		return nil, err
@@ -18,6 +24,8 @@ func LoadImage(name string) (image.Image, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	imgChache[name] = img
 
 	return img, nil
 }
