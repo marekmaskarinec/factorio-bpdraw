@@ -14,6 +14,7 @@ import (
 type BpParse struct {
 	BP Blueprint `json:"blueprint"`
 }
+
 func ParseBPString(s string) (Blueprint, error) {
 	s = s[1:] // first char in bp string is version number (always zero as of 1.1.32)
 	var out BpParse
