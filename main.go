@@ -4,7 +4,6 @@ import (
 	"os"
 	"image"
 	"github.com/marekmaskarinec/factorio-bpdraw/src"
-	"fmt"
 )
 
 
