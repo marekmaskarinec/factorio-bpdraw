@@ -29,6 +29,6 @@ func main() {
 	}
 
 	offx, offy := bp.FindZero()
-	dst, drws := bpdraw.Init(bp.Entities, offx, offy)
-	bpdraw.Draw(bp.Entities, dst, drws)
+	dst := bpdraw.Init(bp.Entities, offx, offy)
+	bpdraw.Draw(bp.Entities, dst)
 }
