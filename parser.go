@@ -44,3 +44,23 @@ func parseBPString(s string) (Blueprint, error) {
 
 	return out.BP, nil
 }
+
+func (b *Blueprint) FindZero() (float64, float64) {
+	if len(b.Entities) < 1 {
+		return 0, 0
+	}
+
+	mx := b.Entities[0].Position.X
+	my := b.Entities[0].Position.Y
+
+	for i:=1; i < len(b.Entities); i++ {
+		if b.Entities[i].Position.X < mx {
+			mx = b.Entities[i].Position.X
+		}
+		if b.Entities[i].Position.Y < my {
+			my = b.Entities[i].Position.Y
+		}
+	}
+
+	return mx, my
+}

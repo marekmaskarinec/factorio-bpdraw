@@ -9,7 +9,7 @@ import (
 )
 
 func LoadImage(name string) (image.Image, error) {
-	f, err := os.Open(factorioPath + filepath.FromSlash("data/base/graphics/entity/"+name+"/"+name+".png"))
+	f, err := os.Open(factorioPath + filepath.FromSlash("data/base/graphics/entity/"+name+"/hr-"+name+".png"))
 	if err != nil {
 		return nil, err
 	}
