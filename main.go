@@ -9,7 +9,7 @@ import (
 var factorioPath string
 
 func main() {
-	// train station, rails and 2 assemblers crafting burner-mining-drill with one input belt line and insserters
+	// train station, rails and 2 assemblers crafting burner-mining-drill with one input belt line and inserters
 	//toParse := "0eNqV1etugyAUB/B3OZ9hES+z9VWWZUF71p4E0QAuaxrffaBJ26w3+CYYfv+DXDxBqyYcDWkHzQmoG7SF5uMElvZaqtDnjiNCA+SwBwZa9qElrcW+VaT3vJfdgTTyHGYGpHf4C42Y2UvCSFJXQ/L5kwFqR45wLWFpHL/01LdovPk8nME4WD940CHRgzx/qxgc1wefY7CjpYx2MhoN70kHYWdIhTpu8vLEvOxBHCrsnKHuZWBxDiRt0Tjf92RS2ZKyI5+zvi/vkGUEmSWJ1Vn8ltZxZ6S242Acb1G5J/Xe4Pkd/D0RL1LwOhHPUvBNIi5S8G0anmSLLA1P+ipCpOFJm0VcDqj1MO0Pji93yp19sqhFhFlEmyLaLGPNeLKKJeNnfjl7QdTcumF85P1fHebLkOszQLjHl5u+ufq3MFDSr3noC+oPGrsO3Yiy3uZ1UdeVyMp5/gPQTCjf"
 
 	// single solar panel
@@ -33,8 +33,6 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	fmt.Println(bp)
 
 	offx, offy := bp.FindZero()
 	dst, drws := Init(bp.Entities, offx, offy)

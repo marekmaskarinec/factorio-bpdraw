@@ -49,26 +49,17 @@ func Draw(ents []Entity, dst *image.RGBA, drs []drawer) {
 	for i := 0; i < len(ents); i++ {
 		fmt.Printf("Drawing %s\n", ents[i].Name)
 
-		var cdrawer drawer
-		inited := false
-		for j := 0; j < len(drs) && !inited; j++ {
-			for k := 0; k < len(drs[j].items) && !inited; k++ {
-				if drs[j].items[k] == ents[i].Name {
-					cdrawer = drs[j]
-					inited = true
-					break
-				}
+		var img image.Image
+		var err error
+		switch ents[i].Name {
+		case "solar-panel", "accumulator":
+			img, err = NormalDraw(ents[i].Name)
+			if err != nil {
+				fmt.Printf("Can't load %s. Make sure you provided correct factorio path.\n%s\n", ents[i].Name, err.Error())
+				continue
 			}
-		}
-
-		if !inited {
+		default:
 			fmt.Printf("Can't find proper drawer for %s. Please file an issue on github.\n", ents[i].Name)
-			continue
-		}
-
-		img, err := cdrawer.drawfn(ents[i].Name)
-		if err != nil {
-			fmt.Println(err.Error())
 			continue
 		}
 
