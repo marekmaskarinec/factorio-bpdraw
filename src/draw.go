@@ -26,10 +26,10 @@ func Init(ents []Entity, offx, offy float64) *image.RGBA {
 		ents[i].Position.X -= offx
 		ents[i].Position.Y -= offy
 		if ents[i].Position.X+9*64 > mw {
-			mw = ents[i].Position.X + 9*64
+			mw = ents[i].Position.X + 18*64
 		}
 		if ents[i].Position.Y+9 > mh {
-			mh = ents[i].Position.Y + 9*64
+			mh = ents[i].Position.Y + 18*64
 		}
 	}
 
@@ -40,6 +40,9 @@ func Init(ents []Entity, offx, offy float64) *image.RGBA {
 // ents - entity array from the blueprint string
 // dst  - the image used as a canvas for drawing
 func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
+	//size := image.Rect(dst.Bounds().Max.X, dst.Bounds().Max.Y, 0, 0)
+	size := image.Rect(0, 0, 0, 0)
+
 	for i := 0; i < len(ents); i++ {
 		fmt.Printf("Drawing %s\n", ents[i].Name)
 
@@ -58,21 +61,36 @@ func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 		}
 
 		dims := img.Bounds()
-		fmt.Println(dims.Max)
 		dims.Max.X /= 2
 		dims.Max.Y /= 2
-		fmt.Println(dims.Max)
+
 		pos := image.Point{int(ents[i].Position.X * 64), int(ents[i].Position.Y * 64)}
-		pos.X += int(info[ents[i].Name].Picture.Layers[0].Shift[0] * 64)
-		pos.Y += int(info[ents[i].Name].Picture.Layers[0].Shift[1] * 64)
+		pos.X += int(info[ents[i].Name].Picture.Layers[0].Shift[0] * 64) + 4.5 * 64
+		pos.Y += int(info[ents[i].Name].Picture.Layers[0].Shift[1] * 64) + 4.5 * 64
+		
 		r := image.Rectangle{pos.Sub(dims.Max), pos.Add(img.Bounds().Max).Sub(dims.Max)}
-		draw.Draw(dst, r/*.Add(image.Point{100, 100})*/, img, image.Point{0, 0}, draw.Over)
+		draw.Draw(dst, r, img, image.Point{0, 0}, draw.Over)
+
+		if r.Min.X < size.Min.X || i == 0 {
+			size.Min.X = r.Min.X
+		}
+		if r.Min.Y < size.Min.Y || i == 0 {
+			size.Min.Y = r.Min.Y
+		}
+		if r.Max.X > size.Max.X {
+			size.Max.X = r.Max.X
+		}
+		if r.Max.Y > size.Max.Y {
+			size.Max.Y = r.Max.Y
+		}
 	}
+
+	fmt.Println(size)
 
 	f, err := os.Create("out.png")
 	if err != nil {
 		panic(err)
 	}
-	png.Encode(f, dst)
+	png.Encode(f, dst.SubImage(size))
 	f.Close()
 }

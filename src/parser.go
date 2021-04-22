@@ -43,11 +43,13 @@ func ParseBPString(s string) (Blueprint, error) {
 	return out.BP, nil
 }
 
+
 func ParseEntityInfo() map[string]EntityInfo {
 	f, err := os.Open("entities.json")
 	if err != nil {
 		panic(err)
 	}
+	
 	dat, err := io.ReadAll(f)
 	if err != nil {
 		panic(err)
