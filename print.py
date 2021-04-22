@@ -9,4 +9,4 @@ if len(sys.argv) == 2:
     pprint(json[sys.argv[1]])
 else:
     print("usage: ./print.py entity-name\navailable options:\n")
-    print(" ".join(json.keys()))
+    print(" ".join(sorted(json.keys())))
