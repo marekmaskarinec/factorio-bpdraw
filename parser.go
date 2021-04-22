@@ -53,7 +53,7 @@ func (b *Blueprint) FindZero() (float64, float64) {
 	mx := b.Entities[0].Position.X
 	my := b.Entities[0].Position.Y
 
-	for i:=1; i < len(b.Entities); i++ {
+	for i := 1; i < len(b.Entities); i++ {
 		if b.Entities[i].Position.X < mx {
 			mx = b.Entities[i].Position.X
 		}

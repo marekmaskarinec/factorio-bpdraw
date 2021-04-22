@@ -1,15 +1,15 @@
 package main
 
 import (
-	"image"
-	"image/png"
-	"image/draw"
-	"os"
 	"fmt"
+	"image"
+	"image/draw"
+	"image/png"
+	"os"
 )
 
 type drawer struct {
-	items []string
+	items  []string
 	drawfn func(name string) (image.Image, error)
 }
 
@@ -20,13 +20,13 @@ func NormalDraw(name string) (image.Image, error) {
 func Init(ents []Entity, offx, offy float64) (*image.RGBA, []drawer) {
 	var mw, mh float64
 
-	for i:=0; i < len(ents); i++ {
+	for i := 0; i < len(ents); i++ {
 		ents[i].Position.X -= offx
 		ents[i].Position.Y -= offy
-		if ents[i].Position.X + 9*64 > mw {
+		if ents[i].Position.X+9*64 > mw {
 			mw = ents[i].Position.X + 9*64
 		}
-		if ents[i].Position.Y + 9 > mh {
+		if ents[i].Position.Y+9 > mh {
 			mh = ents[i].Position.Y + 9*64
 		}
 	}
@@ -35,14 +35,14 @@ func Init(ents []Entity, offx, offy float64) (*image.RGBA, []drawer) {
 }
 
 func Draw(ents []Entity, dst *image.RGBA, drs []drawer) {
-	
-	for i:=0; i < len(ents); i++ {
+
+	for i := 0; i < len(ents); i++ {
 		fmt.Printf("Drawing %s\n", ents[i].Name)
 
 		var cdrawer drawer
 		inited := false
-		for j:=0; j < len(drs) && !inited; j++ {
-			for k:=0; k < len(drs[j].items) && !inited; k++ {
+		for j := 0; j < len(drs) && !inited; j++ {
+			for k := 0; k < len(drs[j].items) && !inited; k++ {
 				if drs[j].items[k] == ents[i].Name {
 					cdrawer = drs[j]
 					inited = true
@@ -62,7 +62,7 @@ func Draw(ents []Entity, dst *image.RGBA, drs []drawer) {
 			continue
 		}
 
-		pos := image.Point{int(ents[i].Position.X*64), int(ents[i].Position.Y*64)}
+		pos := image.Point{int(ents[i].Position.X * 64), int(ents[i].Position.Y * 64)}
 		r := image.Rectangle{pos, pos.Add(img.Bounds().Max)}
 		draw.Draw(dst, r, img, image.Point{0, 0}, draw.Over)
 	}
