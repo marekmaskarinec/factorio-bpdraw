@@ -57,9 +57,14 @@ func Draw(ents []Entity, dst *image.RGBA) {
 			continue
 		}
 
+		dims := img.Bounds()
+		fmt.Println(dims.Max)
+		dims.Max.X /= 2
+		dims.Max.Y /= 2
+		fmt.Println(dims.Max)
 		pos := image.Point{int(ents[i].Position.X * 64), int(ents[i].Position.Y * 64)}
-		r := image.Rectangle{pos, pos.Add(img.Bounds().Max)}
-		draw.Draw(dst, r, img, image.Point{0, 0}, draw.Over)
+		r := image.Rectangle{pos.Sub(dims.Max), pos.Add(img.Bounds().Max).Sub(dims.Max)}
+		draw.Draw(dst, r/*.Add(image.Point{100, 100})*/, img, image.Point{0, 0}, draw.Over)
 	}
 
 	f, err := os.Create("out.png")

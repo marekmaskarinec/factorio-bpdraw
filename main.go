@@ -4,6 +4,7 @@ import (
 	"os"
 	"image"
 	"github.com/marekmaskarinec/factorio-bpdraw/src"
+	"fmt"
 )
 
 
@@ -15,7 +16,10 @@ func main() {
 	//toParse := "0eNptjsEOwiAQRP9lztjY2oryK8YYqhtDQhcC1Ng0/LtQLx68zUx23uyK0c7kg+EEtcLcHUeoy4ponqxtzdLiCQom0QQB1lN10Vkddl4zWWQBww96Q7X5KkCcTDL0xWxmufE8jRTKwV+AgHexdBzXvcLZdc0gsBRxbIZcodu6+nlW4EUhbpXu1Pby3MmDlEO773P+ABhkRWI="
 
 	// 3 solar panels. 2 up one down in the middle
-	toParse := "0eNqN0F0KwjAMAOC75Lkb7qdUexUR6TRIoUtL24lj9O62E0FQcG9JSL6QLDCYCZ3XFEEuoC+WAsjjAkHfSJlSi7NDkKAjjsCA1FiyYI3ylVOEBhIDTVd8gGzSiQFS1FHji1mT+UzTOKDPDT8BBs6GPGOp7MtOJWrOYM4Br3lK7MtpNzrdH6fb6PC30xYnH7l+Q348j8EdfVhH2n3Ti0MrOiF4s+tTegIAP3Ni"
+	//toParse := "0eNqN0F0KwjAMAOC75Lkb7qdUexUR6TRIoUtL24lj9O62E0FQcG9JSL6QLDCYCZ3XFEEuoC+WAsjjAkHfSJlSi7NDkKAjjsCA1FiyYI3ylVOEBhIDTVd8gGzSiQFS1FHji1mT+UzTOKDPDT8BBs6GPGOp7MtOJWrOYM4Br3lK7MtpNzrdH6fb6PC30xYnH7l+Q348j8EdfVhH2n3Ti0MrOiF4s+tTegIAP3Ni"
+
+	// same as above, but with two accumulators added
+	toParse := "0eNqNkdsKgzAMQP8lz51oVdz6K2OM6sIo1FR6GRPpv6+6C4MJ8y0JyckhmaDVAQeryIOYQHWGHIjjBE5dSeq55scBQYDy2AMDkv2cOaOl3Q2SUENkoOiCdxBFPDFA8sorfGKWZDxT6Fu0qWEVwGAwLs0Ymvclzq7IagZjCvKsjpH9cPg2Dv+DKT8Y2XWhD1p6Y1d0+ELha4hqm0n+MuHrIvU2kfLtkc68/EN8vY/BDa1bmvm+qJoDb8qmqYu8ivEBIVWfMA=="
 
 	bpdraw.ImgCache = map[string]image.Image{}
 
@@ -27,6 +31,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	fmt.Println(bpdraw.ParseEntityInfo())
 
 	offx, offy := bp.FindZero()
 	dst := bpdraw.Init(bp.Entities, offx, offy)

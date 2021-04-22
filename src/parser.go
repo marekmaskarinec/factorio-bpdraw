@@ -7,8 +7,8 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
+	"os"
 )
 
 type BpParse struct {
@@ -34,9 +34,6 @@ func ParseBPString(s string) (Blueprint, error) {
 	io.Copy(bufio.NewWriter(&dat), r)
 	r.Close()
 
-	fmt.Println("BP JSON:")
-	fmt.Println(string(dat.Bytes()))
-
 	// parse json
 	err = json.Unmarshal(dat.Bytes(), &out)
 	if err != nil {
@@ -44,6 +41,27 @@ func ParseBPString(s string) (Blueprint, error) {
 	}
 
 	return out.BP, nil
+}
+
+
+func ParseEntityInfo() map[string]EntityInfo {
+	f, err := os.Open("entities.json")
+	if err != nil {
+		panic(err)
+	}
+	
+	dat, err := io.ReadAll(f)
+	if err != nil {
+		panic(err)
+	}
+
+	var out map[string]EntityInfo
+	err = json.Unmarshal(dat, &out)
+	if err != nil {
+		panic(err)
+	}
+
+	return out
 }
 
 // finds the offsets for each axis so that those axis are always positive and start at 0 0

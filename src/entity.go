@@ -133,3 +133,17 @@ type Blueprint struct {
 	Schedules  []ScheduleObject `json:"schedules"`
 	Version    int64            `json:"version"`
 }
+
+type Layer struct {
+	Width int `json:"height"`
+	Height int `json:"width"`
+	Shift []float64 `json:"shift"`
+}
+
+type Picture struct {
+	Layers []Layer `json:"layers"`
+}
+
+type EntityInfo struct {
+	Picture Picture `json:"picture"`
+}
