@@ -23,7 +23,6 @@ func Init(ents []Entity, offx, offy float64) (*image.RGBA, []drawer) {
 	for i:=0; i < len(ents); i++ {
 		ents[i].Position.X -= offx
 		ents[i].Position.Y -= offy
-		fmt.Println("%f, %f\n", ents[i].Position.X, ents[i].Position.Y)
 		if ents[i].Position.X + 9*64 > mw {
 			mw = ents[i].Position.X + 9*64
 		}
@@ -43,10 +42,9 @@ func Draw(ents []Entity, dst *image.RGBA, drs []drawer) {
 		var cdrawer drawer
 		inited := false
 		for j:=0; j < len(drs) && !inited; j++ {
-			for k:=0; k < len(drs[j].items); k++ {
+			for k:=0; k < len(drs[j].items) && !inited; k++ {
 				if drs[j].items[k] == ents[i].Name {
 					cdrawer = drs[j]
-					j = len(drs) + 1
 					inited = true
 					break
 				}
@@ -58,16 +56,15 @@ func Draw(ents []Entity, dst *image.RGBA, drs []drawer) {
 			continue
 		}
 
-
 		img, err := cdrawer.drawfn(ents[i].Name)
 		if err != nil {
 			fmt.Println(err.Error())
 			continue
 		}
+
 		pos := image.Point{int(ents[i].Position.X*64), int(ents[i].Position.Y*64)}
 		r := image.Rectangle{pos, pos.Add(img.Bounds().Max)}
-		fmt.Println(r)
-		draw.Draw(dst, r, img, image.Point{0, 0}, draw.Src)
+		draw.Draw(dst, r, img, image.Point{0, 0}, draw.Over)
 	}
 
 	f, err := os.Create("out.png")

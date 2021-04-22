@@ -1,5 +1,9 @@
 main.go
  |
- +-> blueprint.go - json types definitions (https://wiki.factorio.com/index.php?title=Blueprint_string_format&oldid=182439)
+ +-> entity.go    - json types definitions (https://wiki.factorio.com/index.php?title=Blueprint_string_format&oldid=182439)
  |
  +-> parser.go    - parser form bp string into a blueprint object (bp object is defined in `blueprint.go`)
+ |
+ +-> draw.go      - image drawing
+      |
+      +-> io.go   - loading images
