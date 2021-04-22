@@ -4,7 +4,6 @@ import (
 	"os"
 	"image"
 	"github.com/marekmaskarinec/factorio-bpdraw/src"
-	"fmt"
 )
 
 
@@ -32,9 +31,9 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(bpdraw.ParseEntityInfo())
+	info := bpdraw.ParseEntityInfo()
 
 	offx, offy := bp.FindZero()
 	dst := bpdraw.Init(bp.Entities, offx, offy)
-	bpdraw.Draw(bp.Entities, dst)
+	bpdraw.Draw(bp.Entities, dst, info)
 }

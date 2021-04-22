@@ -39,7 +39,7 @@ func Init(ents []Entity, offx, offy float64) *image.RGBA {
 // Main drawing function. Calls the corresponding drawing functions for every entity in the blueprint
 // ents - entity array from the blueprint string
 // dst  - the image used as a canvas for drawing
-func Draw(ents []Entity, dst *image.RGBA) {
+func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 	for i := 0; i < len(ents); i++ {
 		fmt.Printf("Drawing %s\n", ents[i].Name)
 
@@ -63,6 +63,8 @@ func Draw(ents []Entity, dst *image.RGBA) {
 		dims.Max.Y /= 2
 		fmt.Println(dims.Max)
 		pos := image.Point{int(ents[i].Position.X * 64), int(ents[i].Position.Y * 64)}
+		pos.X += int(info[ents[i].Name].Picture.Layers[0].Shift[0] * 64)
+		pos.Y += int(info[ents[i].Name].Picture.Layers[0].Shift[1] * 64)
 		r := image.Rectangle{pos.Sub(dims.Max), pos.Add(img.Bounds().Max).Sub(dims.Max)}
 		draw.Draw(dst, r/*.Add(image.Point{100, 100})*/, img, image.Point{0, 0}, draw.Over)
 	}
