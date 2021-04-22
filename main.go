@@ -1,12 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"image"
+	"github.com/marekmaskarinec/factorio-bpdraw/src"
 )
 
-var factorioPath string
 
 func main() {
 	// train station, rails and 2 assemblers crafting burner-mining-drill with one input belt line and inserters
@@ -18,23 +17,18 @@ func main() {
 	// 3 solar panels. 2 up one down in the middle
 	toParse := "0eNqN0F0KwjAMAOC75Lkb7qdUexUR6TRIoUtL24lj9O62E0FQcG9JSL6QLDCYCZ3XFEEuoC+WAsjjAkHfSJlSi7NDkKAjjsCA1FiyYI3ylVOEBhIDTVd8gGzSiQFS1FHji1mT+UzTOKDPDT8BBs6GPGOp7MtOJWrOYM4Br3lK7MtpNzrdH6fb6PC30xYnH7l+Q348j8EdfVhH2n3Ti0MrOiF4s+tTegIAP3Ni"
 
-	imgChache = map[string]image.Image{}
+	bpdraw.ImgCache = map[string]image.Image{}
 
 	if len(os.Args) > 1 {
-		factorioPath = os.Args[1] + "/"
+		bpdraw.FactorioPath = os.Args[1] + "/"
 	}
 
-	bp, err := parseBPString(toParse)
+	bp, err := bpdraw.ParseBPString(toParse)
 	if err != nil {
 		panic(err)
 	}
 
-	_, err = LoadImage("assembling-machine-2")
-	if err != nil {
-		fmt.Println(err)
-	}
-
 	offx, offy := bp.FindZero()
-	dst, drws := Init(bp.Entities, offx, offy)
-	Draw(bp.Entities, dst, drws)
+	dst, drws := bpdraw.Init(bp.Entities, offx, offy)
+	bpdraw.Draw(bp.Entities, dst, drws)
 }
