@@ -13,12 +13,14 @@ var FactorioPath string
 
 // Reads entity texture
 // If the entity is animated, the entire texture atlas is returned
-func LoadImage(name string) (image.Image, error) {
+func LoadImage(name string, info EntityInfo) (image.Image, error) {
 	if val, ok := ImgCache[name]; ok {
 		return val, nil
 	}
 
-	f, err := os.Open(FactorioPath + filepath.FromSlash("data/base/graphics/entity/"+name+"/hr-"+name+".png"))
+	_, fname := filepath.Split(info.Picture.Layers[0].Path)
+
+	f, err := os.Open(FactorioPath + filepath.FromSlash("data/base/graphics/entity/"+name+"/hr-"+fname))
 	if err != nil {
 		return nil, err
 	}

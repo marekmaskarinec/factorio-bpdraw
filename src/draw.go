@@ -8,12 +8,6 @@ import (
 	"os"
 )
 
-// For primitive, not animated, without alt-mode support, without circuit connection support entities
-// such as solar panel
-func NormalDraw(name string) (image.Image, error) {
-	return LoadImage(name)
-}
-
 // Initializes drawing canvas with the right size
 // ents - entity array from blueprint string
 // offx - by how much change the X axis so that the smallest X coordinate in blueprint is on 0
@@ -40,7 +34,6 @@ func Init(ents []Entity, offx, offy float64) *image.RGBA {
 // ents - entity array from the blueprint string
 // dst  - the image used as a canvas for drawing
 func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
-	//size := image.Rect(dst.Bounds().Max.X, dst.Bounds().Max.Y, 0, 0)
 	size := image.Rect(0, 0, 0, 0)
 
 	for i := 0; i < len(ents); i++ {
@@ -49,15 +42,16 @@ func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 		var img image.Image
 		var err error
 		switch ents[i].Name {
-		case "solar-panel", "accumulator":
-			img, err = NormalDraw(ents[i].Name)
+		default:
+			if _, ok := info[ents[i].Name]; !ok {
+				fmt.Printf("Can't find proper drawer for %s. Please file an issue on github.\n", ents[i].Name)
+				continue
+			}
+			img, err = LoadImage(ents[i].Name, info[ents[i].Name])
 			if err != nil {
 				fmt.Printf("Can't load %s. Make sure you provided correct factorio path.\n%s\n", ents[i].Name, err.Error())
 				continue
 			}
-		default:
-			fmt.Printf("Can't find proper drawer for %s. Please file an issue on github.\n", ents[i].Name)
-			continue
 		}
 
 		dims := img.Bounds()
@@ -68,7 +62,11 @@ func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 		pos.X += int(info[ents[i].Name].Picture.Layers[0].Shift[0] * 64) + 4.5 * 64
 		pos.Y += int(info[ents[i].Name].Picture.Layers[0].Shift[1] * 64) + 4.5 * 64
 		
+		layer := info[ents[i].Name].Picture.Layers[0].HrVersion
 		r := image.Rectangle{pos.Sub(dims.Max), pos.Add(img.Bounds().Max).Sub(dims.Max)}
+		r.Max.X = int(float64(layer.Width) * 1.875) + r.Min.X
+		r.Max.Y = int(float64(layer.Height) * 1.875) + r.Min.Y
+		fmt.Println(r)
 		draw.Draw(dst, r, img, image.Point{0, 0}, draw.Over)
 
 		if r.Min.X < size.Min.X || i == 0 {

@@ -4,6 +4,7 @@ import (
 	"os"
 	"image"
 	"github.com/marekmaskarinec/factorio-bpdraw/src"
+	"fmt"
 )
 
 
@@ -18,10 +19,10 @@ func main() {
 	//toParse := "0eNqN0F0KwjAMAOC75Lkb7qdUexUR6TRIoUtL24lj9O62E0FQcG9JSL6QLDCYCZ3XFEEuoC+WAsjjAkHfSJlSi7NDkKAjjsCA1FiyYI3ylVOEBhIDTVd8gGzSiQFS1FHji1mT+UzTOKDPDT8BBs6GPGOp7MtOJWrOYM4Br3lK7MtpNzrdH6fb6PC30xYnH7l+Q348j8EdfVhH2n3Ti0MrOiF4s+tTegIAP3Ni"
 
 	// same as above, but with two accumulators added
-	toParse := "0eNqNkdsKgzAMQP8lz51oVdz6K2OM6sIo1FR6GRPpv6+6C4MJ8y0JyckhmaDVAQeryIOYQHWGHIjjBE5dSeq55scBQYDy2AMDkv2cOaOl3Q2SUENkoOiCdxBFPDFA8sorfGKWZDxT6Fu0qWEVwGAwLs0Ymvclzq7IagZjCvKsjpH9cPg2Dv+DKT8Y2XWhD1p6Y1d0+ELha4hqm0n+MuHrIvU2kfLtkc68/EN8vY/BDa1bmvm+qJoDb8qmqYu8ivEBIVWfMA=="
+	//toParse := "0eNqNkdsKgzAMQP8lz51oVdz6K2OM6sIo1FR6GRPpv6+6C4MJ8y0JyckhmaDVAQeryIOYQHWGHIjjBE5dSeq55scBQYDy2AMDkv2cOaOl3Q2SUENkoOiCdxBFPDFA8sorfGKWZDxT6Fu0qWEVwGAwLs0Ymvclzq7IagZjCvKsjpH9cPg2Dv+DKT8Y2XWhD1p6Y1d0+ELha4hqm0n+MuHrIvU2kfLtkc68/EN8vY/BDa1bmvm+qJoDb8qmqYu8ivEBIVWfMA=="
 
-	// same as above, but with two accumulators added
-	toParse := "0eNqNkdsKgzAMQP8lz51oVdz6K2OM6sIo1FR6GRPpv6+6C4MJ8y0JyckhmaDVAQeryIOYQHWGHIjjBE5dSeq55scBQYDy2AMDkv2cOaOl3Q2SUENkoOiCdxBFPDFA8sorfGKWZDxT6Fu0qWEVwGAwLs0Ymvclzq7IagZjCvKsjpH9cPg2Dv+DKT8Y2XWhD1p6Y1d0+ELha4hqm0n+MuHrIvU2kfLtkc68/EN8vY/BDa1bmvm+qJoDb8qmqYu8ivEBIVWfMA=="
+	// solar panel and accumulator next to nuclear reactor
+	toParse := "0eNqFkN0KwjAMRt8l11Vc55j2VUSkq0EKXTr6I47Rd7edIqITLxPynZxkgs5EHJymAGICrSx5EIcJvL6QNKUXxgFBgA7YAwOSfakoKoPSrRxKFayDxEDTGW8gqsT+pr01OTtIQvOW5OnIACnooPEhMRfjiWLfocvon+sZDNbnnKWys1js1w2DMUPXTSpGHyi+6PKF4fUTUy1j6hdGKhX7aOSiDa9nyDaVC+dXiLe/M7ii8/M031Xbds/bum2bapPn7+ohiN4="
 
 	bpdraw.ImgCache = map[string]image.Image{}
 

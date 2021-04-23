@@ -134,10 +134,16 @@ type Blueprint struct {
 	Version    int64            `json:"version"`
 }
 
+type HrLayer struct {
+	Width int `json:"width"`
+	Height int `json:"height"`
+}
+
 type Layer struct {
-	Width int `json:"height"`
+	HrVersion HrLayer `json:"hr_version"`
 	Height int `json:"width"`
 	Shift []float64 `json:"shift"`
+	Path string `json:"filename"`
 }
 
 type Picture struct {
