@@ -64,9 +64,8 @@ func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 		
 		layer := info[ents[i].Name].Picture.Layers[0].HrVersion
 		r := image.Rectangle{pos.Sub(dims.Max), pos.Add(img.Bounds().Max).Sub(dims.Max)}
-		r.Max.X = int(float64(layer.Width) * 1.875) + r.Min.X
-		r.Max.Y = int(float64(layer.Height) * 1.875) + r.Min.Y
-		fmt.Println(r)
+		r.Max.X = layer.Width + r.Min.X
+		r.Max.Y = layer.Height + r.Min.Y
 		draw.Draw(dst, r, img, image.Point{0, 0}, draw.Over)
 
 		if r.Min.X < size.Min.X || i == 0 {
@@ -82,8 +81,6 @@ func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 			size.Max.Y = r.Max.Y
 		}
 	}
-
-	fmt.Println(size)
 
 	f, err := os.Create("out.png")
 	if err != nil {
