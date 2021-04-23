@@ -1,0 +1,14 @@
+single image:
+	accumulator, chests, electric-furnace, market, reactor0
+
+animation:
+	assembling-machine-1, electric poles, combinator, lab
+
+multiple images:
+	artillery-turret, artillery-wagon, assembling-machine2/3, beacon, inserters, cargo wagon, centrifuge, electric mining drill, splitter, gun turret, laser turret
+
+rotation:
+	boiler, burner mining drill, chemical-plant, diesel locomotive, underground belt, heat exchanger, offshore pump
+
+etc:
+	belt, heat pipe
