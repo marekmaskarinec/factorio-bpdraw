@@ -76,9 +76,13 @@ filtered = {}
 for k,v in pairs(data.raw) do
 	for key,val in pairs(v) do
 		if val["picture"] ~= nil then
-			print("filtered add " .. val["name"])
+			print("filtered add static    " .. val["name"])
 			filtered[val["name"]] = {}
 			filtered[val["name"]]["picture"] = val["picture"]
+		elseif val["animation"] ~= nil then
+			print("filtered add animation " .. val["name"])
+			filtered[val["name"]] = {}
+			filtered[val["name"]]["picture"] = val["animation"]
 		end
 	end
 end
