@@ -21,8 +21,8 @@ func main() {
 	// same as above, but with two accumulators added
 	//toParse := "0eNqNkdsKgzAMQP8lz51oVdz6K2OM6sIo1FR6GRPpv6+6C4MJ8y0JyckhmaDVAQeryIOYQHWGHIjjBE5dSeq55scBQYDy2AMDkv2cOaOl3Q2SUENkoOiCdxBFPDFA8sorfGKWZDxT6Fu0qWEVwGAwLs0Ymvclzq7IagZjCvKsjpH9cPg2Dv+DKT8Y2XWhD1p6Y1d0+ELha4hqm0n+MuHrIvU2kfLtkc68/EN8vY/BDa1bmvm+qJoDb8qmqYu8ivEBIVWfMA=="
 
-	// solar panel and accumulator next to nuclear reactor
-	toParse := "0eNqFkN0KwjAMRt8l11Vc55j2VUSkq0EKXTr6I47Rd7edIqITLxPynZxkgs5EHJymAGICrSx5EIcJvL6QNKUXxgFBgA7YAwOSfakoKoPSrRxKFayDxEDTGW8gqsT+pr01OTtIQvOW5OnIACnooPEhMRfjiWLfocvon+sZDNbnnKWys1js1w2DMUPXTSpGHyi+6PKF4fUTUy1j6hdGKhX7aOSiDa9nyDaVC+dXiLe/M7ii8/M031Xbds/bum2bapPn7+ohiN4="
+	// solar panel and accumulator next to nuclear reactor. Under them, there are two blue assemblers and a furnace
+	toParse := "0eNqVkttqwzAMQP9Fz05ZnKRp8ytlFMfTOoOtBF9GQ/C/z07LWtasY48y1tHRZYZeBxytIg/dDEoO5KA7zODUiYTOb34aETpQHg0wIGFyREFqFLawKKQfLEQGit7wDF0Z2Z/Zwjk0vVZ0KoyQH4qw4HcIHl8ZIHnlFV5slmA6UjA92lTjVw8G4+BS3kC5eNbZbxoGU4JumpjVfqD4N8oNOoFGQagfMby6Ysp1THXrTcpggharNrxaIPUaon4+nsfOdlel7bpS808eL5/ztrdJeURdvAdLQuIKqL5gYl7jsvju7soYfKJ1y2++K+t2z9uqbZvyJQ3lC3dD1vE="
 
 	bpdraw.ImgCache = map[string]image.Image{}
 

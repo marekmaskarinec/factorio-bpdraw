@@ -54,16 +54,12 @@ func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 			}
 		}
 
-		dims := img.Bounds()
-		dims.Max.X /= 2
-		dims.Max.Y /= 2
-
 		pos := image.Point{int(ents[i].Position.X * 64), int(ents[i].Position.Y * 64)}
 		pos.X += int(info[ents[i].Name].Picture.Layers[0].Shift[0] * 64) + 4.5 * 64
 		pos.Y += int(info[ents[i].Name].Picture.Layers[0].Shift[1] * 64) + 4.5 * 64
 		
 		layer := info[ents[i].Name].Picture.Layers[0].HrVersion
-		r := image.Rectangle{pos.Sub(dims.Max), pos.Add(img.Bounds().Max).Sub(dims.Max)}
+		r := image.Rectangle{pos.Sub(image.Point{layer.Width/2, layer.Height/2}), pos.Add(img.Bounds().Max).Sub(image.Point{layer.Width/2, layer.Height/2})}
 		r.Max.X = layer.Width + r.Min.X
 		r.Max.Y = layer.Height + r.Min.Y
 		draw.Draw(dst, r, img, image.Point{0, 0}, draw.Over)

@@ -6,6 +6,7 @@ import (
 	"image/png"
 	"os"
 	"path/filepath"
+	"fmt"
 )
 
 var ImgCache map[string]image.Image
@@ -24,6 +25,8 @@ func LoadImage(name string, info EntityInfo) (image.Image, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	fmt.Println(FactorioPath + filepath.FromSlash("data/base/graphics/entity/"+name+"/hr-"+fname))
 
 	img, err := png.Decode(bufio.NewReader(f))
 	if err != nil {
