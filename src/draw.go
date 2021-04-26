@@ -39,42 +39,45 @@ func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 	for i := 0; i < len(ents); i++ {
 		fmt.Printf("Drawing %s\n", ents[i].Name)
 
-		var img image.Image
-		var err error
+		var layers []Layer
 		switch ents[i].Name {
 		default:
 			if _, ok := info[ents[i].Name]; !ok {
 				fmt.Printf("Can't find proper drawer for %s. Please file an issue on github.\n", ents[i].Name)
 				continue
 			}
-			img, err = LoadImage(ents[i].Name, info[ents[i].Name])
+			layers = info[ents[i].Name].Picture.Layers	
+		}
+
+		for j:=len(layers)-1; j >= 0; j-- { 
+			img, err := LoadImage(ents[i].Name, layers[j].Path)
 			if err != nil {
 				fmt.Printf("Can't load %s. Make sure you provided correct factorio path.\n%s\n", ents[i].Name, err.Error())
 				continue
 			}
-		}
 
-		pos := image.Point{int(ents[i].Position.X * 64), int(ents[i].Position.Y * 64)}
-		pos.X += int(info[ents[i].Name].Picture.Layers[0].Shift[0] * 64) + 4.5 * 64
-		pos.Y += int(info[ents[i].Name].Picture.Layers[0].Shift[1] * 64) + 4.5 * 64
-		
-		layer := info[ents[i].Name].Picture.Layers[0].HrVersion
-		r := image.Rectangle{pos.Sub(image.Point{layer.Width/2, layer.Height/2}), pos.Add(img.Bounds().Max).Sub(image.Point{layer.Width/2, layer.Height/2})}
-		r.Max.X = layer.Width + r.Min.X
-		r.Max.Y = layer.Height + r.Min.Y
-		draw.Draw(dst, r, img, image.Point{0, 0}, draw.Over)
-
-		if r.Min.X < size.Min.X || i == 0 {
-			size.Min.X = r.Min.X
-		}
-		if r.Min.Y < size.Min.Y || i == 0 {
-			size.Min.Y = r.Min.Y
-		}
-		if r.Max.X > size.Max.X {
-			size.Max.X = r.Max.X
-		}
-		if r.Max.Y > size.Max.Y {
-			size.Max.Y = r.Max.Y
+			pos := image.Point{int(ents[i].Position.X * 64), int(ents[i].Position.Y * 64)}
+			pos.X += int(layers[j].Shift[0] * 64) + 4.5 * 64
+			pos.Y += int(layers[j].Shift[1] * 64) + 4.5 * 64
+			
+			layer := layers[j].HrVersion
+			r := image.Rectangle{pos.Sub(image.Point{layer.Width/2, layer.Height/2}), pos.Add(img.Bounds().Max).Sub(image.Point{layer.Width/2, layer.Height/2})}
+			r.Max.X = layer.Width + r.Min.X
+			r.Max.Y = layer.Height + r.Min.Y
+			draw.Draw(dst, r, img, image.Point{0, 0}, draw.Over)
+      
+			if r.Min.X < size.Min.X || i == 0 {
+				size.Min.X = r.Min.X
+			}
+			if r.Min.Y < size.Min.Y || i == 0 {
+				size.Min.Y = r.Min.Y
+			}
+			if r.Max.X > size.Max.X {
+				size.Max.X = r.Max.X
+			}
+			if r.Max.Y > size.Max.Y {
+				size.Max.Y = r.Max.Y
+			}
 		}
 	}
 
@@ -82,6 +85,9 @@ func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 	if err != nil {
 		panic(err)
 	}
-	png.Encode(f, dst.SubImage(size))
+	err = png.Encode(f, dst.SubImage(size))
+	if err != nil {
+		panic(err)
+	}
 	f.Close()
 }
