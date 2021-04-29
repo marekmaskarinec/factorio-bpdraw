@@ -72,6 +72,7 @@ require("factorio-data.base.prototypes.entity.entities")
 
 -- filter out the raw data table
 -- =============================
+print()
 filtered = {}
 for k,v in pairs(data.raw) do
 	for key,val in pairs(v) do
@@ -83,6 +84,15 @@ for k,v in pairs(data.raw) do
 			print("filtered add animation " .. val["name"])
 			filtered[val["name"]] = {}
 			filtered[val["name"]]["picture"] = val["animation"]
+		elseif val["hand_base_picture"] ~= nil then -- for inserters
+			print("filtered add inserter  " .. val["name"])
+			filtered[val["name"]] = {}
+			filtered[val["name"]]["picture"] = {}
+			filtered[val["name"]]["picture"]["rot_layers"] = {}
+			filtered[val["name"]]["picture"]["rot_layers"][1] = val["hand_base_picture"]
+			filtered[val["name"]]["picture"]["rot_layers"][2] = val["hand_closed_picture"]
+			filtered[val["name"]]["picture"]["layers"] = {}
+			filtered[val["name"]]["picture"]["layers"] = val["platform_picture"]["sheet"]
 		end
 	end
 end
