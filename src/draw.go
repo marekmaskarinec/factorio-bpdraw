@@ -49,18 +49,14 @@ func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 			if info[ents[i].Name].Picture.Layers == nil {
 				fmt.Println(ents[i].Direction)
 				switch ents[i].Direction {
-				case 0:
-					layers = info[ents[i].Name].Picture.North.Layers
-					fmt.Println("her0")
-				case 2:
-					layers = info[ents[i].Name].Picture.West.Layers
-					fmt.Println("her1")
-				case 4:
-					layers = info[ents[i].Name].Picture.East.Layers
-					fmt.Println("her2")
 				case 6:
-					layers = info[ents[i].Name].Picture.South.Layers
-					fmt.Println("her3")
+					layers = info[ents[i].Name].Picture.North.Layers[:1]
+				case 2:
+					layers = info[ents[i].Name].Picture.West.Layers[:1]
+				case 4:
+					layers = info[ents[i].Name].Picture.East.Layers[:1]
+				case 0:
+					layers = info[ents[i].Name].Picture.South.Layers[:1]
 				}
 				break
 			}
