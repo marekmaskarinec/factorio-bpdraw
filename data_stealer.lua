@@ -92,7 +92,7 @@ for k,v in pairs(data.raw) do
 			filtered[val["name"]]["picture"]["rot_layers"][1] = val["hand_base_picture"]
 			filtered[val["name"]]["picture"]["rot_layers"][2] = val["hand_closed_picture"]
 			filtered[val["name"]]["picture"]["layers"] = {}
-			filtered[val["name"]]["picture"]["layers"] = val["platform_picture"]["sheet"]
+			filtered[val["name"]]["picture"]["layers"][1] = val["platform_picture"]["sheet"]
 		end
 	end
 end
