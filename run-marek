@@ -1,0 +1,2 @@
+#!/bin/sh
+go run github.com/marekmaskarinec/factorio-bpdraw /home/marek/.local/share/Steam/steamapps/common/Factorio && feh out.png

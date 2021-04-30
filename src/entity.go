@@ -144,10 +144,20 @@ type Layer struct {
 	Height int `json:"width"`
 	Shift []float64 `json:"shift"`
 	Path string `json:"filename"`
+	LineLenght int `json:"line_lenght"`
+	FrameCount int `json:"frame_count"`
+}
+
+type Orientation struct {
+	Layers []Layer `json:"layers"`
 }
 
 type Picture struct {
 	Layers []Layer `json:"layers"`
+	North Orientation `json:"north"`
+	West Orientation `json:"west"`
+	East Orientation `json:"east"`
+	South Orientation `json:"south"`
 }
 
 type EntityInfo struct {

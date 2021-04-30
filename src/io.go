@@ -6,6 +6,7 @@ import (
 	"image/png"
 	"os"
 	"path/filepath"
+	"fmt"
 )
 
 var ImgCache map[string]image.Image
@@ -18,6 +19,8 @@ func LoadImage(name, fname string) (image.Image, error) {
 	if val, ok := ImgCache[fname]; ok {
 		return val, nil
 	}
+
+	fmt.Println(fname)
 
 	f, err := os.Open(FactorioPath + filepath.FromSlash("data/base/graphics/entity/"+name+"/hr-"+fname))
 	if err != nil {

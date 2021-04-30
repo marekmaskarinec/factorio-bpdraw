@@ -22,7 +22,10 @@ func main() {
 	//toParse := "0eNqNkdsKgzAMQP8lz51oVdz6K2OM6sIo1FR6GRPpv6+6C4MJ8y0JyckhmaDVAQeryIOYQHWGHIjjBE5dSeq55scBQYDy2AMDkv2cOaOl3Q2SUENkoOiCdxBFPDFA8sorfGKWZDxT6Fu0qWEVwGAwLs0Ymvclzq7IagZjCvKsjpH9cPg2Dv+DKT8Y2XWhD1p6Y1d0+ELha4hqm0n+MuHrIvU2kfLtkc68/EN8vY/BDa1bmvm+qJoDb8qmqYu8ivEBIVWfMA=="
 
 	// solar panel and accumulator next to nuclear reactor. Under them, there are two blue assemblers and a furnace
-	toParse := "0eNqVkttqwzAMQP9Fz05ZnKRp8ytlFMfTOoOtBF9GQ/C/z07LWtasY48y1tHRZYZeBxytIg/dDEoO5KA7zODUiYTOb34aETpQHg0wIGFyREFqFLawKKQfLEQGit7wDF0Z2Z/Zwjk0vVZ0KoyQH4qw4HcIHl8ZIHnlFV5slmA6UjA92lTjVw8G4+BS3kC5eNbZbxoGU4JumpjVfqD4N8oNOoFGQagfMby6Ysp1THXrTcpggharNrxaIPUaon4+nsfOdlel7bpS808eL5/ztrdJeURdvAdLQuIKqL5gYl7jsvju7soYfKJ1y2++K+t2z9uqbZvyJQ3lC3dD1vE="
+	//toParse := "0eNqVkttqwzAMQP9Fz05ZnKRp8ytlFMfTOoOtBF9GQ/C/z07LWtasY48y1tHRZYZeBxytIg/dDEoO5KA7zODUiYTOb34aETpQHg0wIGFyREFqFLawKKQfLEQGit7wDF0Z2Z/Zwjk0vVZ0KoyQH4qw4HcIHl8ZIHnlFV5slmA6UjA92lTjVw8G4+BS3kC5eNbZbxoGU4JumpjVfqD4N8oNOoFGQagfMby6Ysp1THXrTcpggharNrxaIPUaon4+nsfOdlel7bpS808eL5/ztrdJeURdvAdLQuIKqL5gYl7jsvju7soYfKJ1y2++K+t2z9uqbZvyJQ3lC3dD1vE="
+
+	// four chemical plants all rotated differently
+	toParse := "0eNqdkdEOgjAMRf+lz4M4YIL7FWMMjEabwCBjGAnZvzvgRQUf5K23ac+9aUcoqh5bQ9qCHIFUozuQ5xE6uum8mnp2aBEkkMUaGOi8npS6Y00qr4K2yv2qY0C6xCdI7i4MUFuyhAtpFsNV93WBxg/8YjBom86vNXpy9aggEqFgMPiK81B4j5IMqmXi6NgKHf2Bzj7QG7B4T87sO2a0QU72xFyRk+nQ81Pk2w8ZPNB0i3XGk/QUpXGaCn5InHsBiAWfJg=="
 
 	bpdraw.ImgCache = map[string]image.Image{}
 

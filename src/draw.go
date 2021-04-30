@@ -46,6 +46,24 @@ func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 				fmt.Printf("Can't find proper drawer for %s. Please file an issue on github.\n", ents[i].Name)
 				continue
 			}
+			if info[ents[i].Name].Picture.Layers == nil {
+				fmt.Println(ents[i].Direction)
+				switch ents[i].Direction {
+				case 0:
+					layers = info[ents[i].Name].Picture.North.Layers
+					fmt.Println("her0")
+				case 2:
+					layers = info[ents[i].Name].Picture.West.Layers
+					fmt.Println("her1")
+				case 4:
+					layers = info[ents[i].Name].Picture.East.Layers
+					fmt.Println("her2")
+				case 6:
+					layers = info[ents[i].Name].Picture.South.Layers
+					fmt.Println("her3")
+				}
+				break
+			}
 			layers = info[ents[i].Name].Picture.Layers	
 		}
 
@@ -59,12 +77,13 @@ func Draw(ents []Entity, dst *image.RGBA, info map[string]EntityInfo) {
 			pos := image.Point{int(ents[i].Position.X * 64), int(ents[i].Position.Y * 64)}
 			pos.X += int(layers[j].Shift[0] * 64) + 4.5 * 64
 			pos.Y += int(layers[j].Shift[1] * 64) + 4.5 * 64
-			
+
 			layer := layers[j].HrVersion
 			r := image.Rectangle{pos.Sub(image.Point{layer.Width/2, layer.Height/2}), pos.Add(img.Bounds().Max).Sub(image.Point{layer.Width/2, layer.Height/2})}
 			r.Max.X = layer.Width + r.Min.X
 			r.Max.Y = layer.Height + r.Min.Y
-			draw.Draw(dst, r, img, image.Point{0, 0}, draw.Over)
+			//r.Add(off)
+			draw.Draw(dst, r, img, image.Point{0, ents[i].Direction * layer.Height}, draw.Over)
       
 			if r.Min.X < size.Min.X || i == 0 {
 				size.Min.X = r.Min.X
